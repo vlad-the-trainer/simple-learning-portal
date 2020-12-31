@@ -13,6 +13,21 @@
 //      echo "<br>";
    }
 
+//retrive name
+   $sql =<<<EOF
+      select name from engineers where engineer_id = $engineer_id;
+EOF;
+
+   $ret = pg_query($db, $sql);
+   if(!$ret) {
+      echo pg_last_error($db);
+      exit;
+   }
+
+   $row = pg_fetch_row($ret);
+
+   echo 'The list of activities scheduled for ' . $row[0] . ':<br><br>';
+
 //retrive data
    $sql =<<<EOF
       select a.activity_name, eta, done, completion_date from scheduled_activities sa join activities a on sa.activity_id = a.activity_id where engineer_id = $engineer_id order by ETA;
@@ -25,8 +40,6 @@ EOF;
    }
 
 // Show the table with activities scheduled for the enginer
-
-   echo 'The list of activities scheduled for Muhammad Prepodobnyj:<br><br>';
 
    echo "<table border='1'>
    <tr>
@@ -64,29 +77,13 @@ EOF;
         echo "<td></td>";
       }
 
-//      $date_var = mktime($row[3]);
-//      echo "<td>" . date("d M Y", $date_var) . "</td>";
-
-      //echo '<td><a href="'.$name_link.'.php">' . $row[0] . '</a></td>';
-      //      echo "<td>" . $row[1] . "</td>";
-      //echo '<td><a href="'.$name_link.'.php">' . $row[1] . '</a></td>';
-//      $name_link = strtok($row[2], '@');
-//      echo "<td>";
-      //      echo "<a href='" . $name_link . "'>Link</a>"
-      //echo "<a href=\"ya.ru\">Link</a>"
-      //echo '<td><a href="'.$name_link.'.php">' . $row[2] . '</a></td>';
-//      echo "</td>";
-//      echo "<td>" . $row[2] . "</td>";
       echo "</tr>";
-//      echo "ID = ". $row[0] . "\n";
-//      echo "NAME = ". $row[1] ."\n";
-//      echo "EMAIL = ". $row[2] ."\n";
    }
    echo "</table>";
-//   echo "Operation done successfully\n";
+
    pg_close($db);
 
-   echo "<br><br><a href=dashboard.php>Back to dashboard</a>";
+   echo "<br><br><a href=index.php>Back to dashboard</a>";
 
 ?>
 

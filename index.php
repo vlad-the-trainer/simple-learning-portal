@@ -41,21 +41,10 @@ EOF;
    while($row = pg_fetch_row($ret)) {
       $name_link = strtok($row[2], '@');
       echo "<tr>";
-//      echo "<td>" . $row[0] . "</td>";
-      echo '<td><a href="'.$name_link.'.php">' . $row[0] . '</a></td>';
-      //      echo "<td>" . $row[1] . "</td>";
-      echo '<td><a href="'.$name_link.'.php">' . $row[1] . '</a></td>';
-//      $name_link = strtok($row[2], '@');
-//      echo "<td>";
-      //      echo "<a href='" . $name_link . "'>Link</a>"
-      //echo "<a href=\"ya.ru\">Link</a>"
-      echo '<td><a href="'.$name_link.'.php">' . $row[2] . '</a></td>';
-//      echo "</td>";
-//      echo "<td>" . $row[2] . "</td>";
+      echo '<td><a href=engineer.php?id=' . $row[0] . '>' . $row[0] . '</a></td>';
+      echo '<td><a href=engineer.php?id=' . $row[0] . '>' . $row[1] . '</a></td>';
+      echo '<td><a href=engineer.php?id=' . $row[0] . '>' . $row[2] . '</a></td>';
       echo "</tr>";
-//      echo "ID = ". $row[0] . "\n";
-//      echo "NAME = ". $row[1] ."\n";
-//      echo "EMAIL = ". $row[2] ."\n";
    }
    echo "</table>";
 //   echo "Operation done successfully\n";
